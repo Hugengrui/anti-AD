@@ -180,6 +180,7 @@ rule-providers:
 rules:
  - RULE-SET,direct,🎯 全球直连
  - RULE-SET,adblock,REJECT
+ - GEOIP,CN,🎯 全球直连
  - DOMAIN-SUFFIX,acl4.ssr,DIRECT
  - DOMAIN-SUFFIX,ip6-localhost,DIRECT
  - DOMAIN-SUFFIX,ip6-loopback,DIRECT
