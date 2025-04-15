@@ -13,7 +13,7 @@ hosts:
     services.googleapis.cn: 74.125.203.94
 dns:
     enable: true
-    listen: '192.168.123.73:53'
+    listen: '0.0.0.0:53'
     ipv6: false
     default-nameserver: [114.114.114.114, 223.5.5.5, 119.29.29.29]
     enhanced-mode: fake-ip
@@ -128,7 +128,7 @@ proxy-groups:
   - name: bili
     type: select
     proxies:
-      - speed
+      - 🎯 全球直连
   - name: 📢 谷歌FCM
     type: select
     proxies:
