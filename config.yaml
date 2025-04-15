@@ -178,7 +178,6 @@ rule-providers:
     interval: 300
     
 rules:
- - RULE-SET,direct,🎯 全球直连
  - RULE-SET,adblock,REJECT
  - GEOIP,CN,🎯 全球直连
  - DOMAIN-SUFFIX,acl4.ssr,DIRECT
