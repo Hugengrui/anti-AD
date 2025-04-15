@@ -170,8 +170,15 @@ rule-providers:
     url: https://anti.snnu.me/anti-ad-clash.yaml
     path: ./ruleset/adblock_reject.yaml
     interval: 120
+  direct:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 300
     
 rules:
+ - RULE-SET,direct,🎯 全球直连
  - RULE-SET,adblock,REJECT
  - DOMAIN-SUFFIX,acl4.ssr,DIRECT
  - DOMAIN-SUFFIX,ip6-localhost,DIRECT
