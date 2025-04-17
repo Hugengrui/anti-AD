@@ -40,8 +40,6 @@ tun:
   auto-detect-interface: true
   #interface-name: enp1s0
 proxies:
-#  - {name: 未命名配置, server: ccv6.newbe.website, port: 50933, type: vmess, uuid: 1aa43627-d427-4aba-8e2b-827814987078, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, udp: true}
-#  - {name: 未命名配置, server: hv.newbe.website, port: 443, type: trojan, password: fuckyougfw, skip-cert-verify: true, udp:true}
   - name: speed 
     server: 10.8.51.245 
     port: 27891 
@@ -61,7 +59,6 @@ proxies:
     username: "admin"
     password: "fuckyouadmin"
     udp: true
-#  - {name: 10.8.51.15:50001, server: 10.8.51.15, port: 57891, type: socks5, username: "user", password: "fuckyouadmin", udp: true}
   - name: jp
     type: vmess
     server: jp.snnu.me
@@ -82,7 +79,7 @@ proxy-groups:
       - ♻️ 自动选择
       - jp
       - DIRECT
-    url: https://www.google.com/generate_204
+    url: http://www.apple.com/library/test/success.html
     interval: 120
   - name: ♻️ 自动选择
     type: load-balance
