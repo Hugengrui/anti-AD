@@ -13,7 +13,7 @@ hosts:
     services.googleapis.cn: 74.125.203.94
 dns:
     enable: true
-    listen: '0.0.0.0:53'
+    listen: '0.0.0.0:1053'
     ipv6: false
     default-nameserver: [114.114.114.114, 223.5.5.5, 119.29.29.29]
     enhanced-mode: fake-ip
@@ -64,17 +64,17 @@ proxies:
 #  - {name: 10.8.51.15:50001, server: 10.8.51.15, port: 57891, type: socks5, username: "user", password: "fuckyouadmin", udp: true}
   - name: jp
     type: vmess
-    server: hk.newbe.asia
+    server: jp.snnu.me
     port: 443
-    uuid: c4371b46-6186-4de3-88e4-2e5964693c5e
+    uuid: 1e3d048d-2d01-4b19-8d05-3c2799369041
     alterId: 0
     cipher: auto
     network: h2
     tls: true
     h2-opts:
       host:
-        - hk.newbe.asia
-      path: /c4371b46-6186-4de3-88e4-2e5964693c5e
+        - jp.snnu.me
+      path: /1e3d048d-2d01-4b19-8d05-3c2799369041
 proxy-groups:
   - name: 🚀 节点选择
     type: fallback
