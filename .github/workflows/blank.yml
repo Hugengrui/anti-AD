@@ -1,49 +1,52 @@
 # 工作流的名称
-name: Sync Fork v3
+name: Sync Fork with Upstream
 
-# 触发工作流的事件
+# 工作流的触发条件
 on:
-  # 1. 定时触发：每天凌晨3点（UTC时间）运行一次
-  schedule:
-    - cron: '0 3 * * *'
-  
-  # 2. 手动触发：允许你在 Actions 页面手动点击按钮运行
+  # 1. 允许您在 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
 
-# 定义一个工作 (job)
+  # 2. 定时任务：使用 cron 语法，这里设置为每小时执行一次
+  # 如果不需要定时同步，可以注释掉下面这行
+  schedule:
+    - cron: '0 * * * *'
+
+# 定义一个或多个作业
 jobs:
+  # 作业的唯一ID
   sync:
-    # 运行此 job 的虚拟机环境
+    # 作业运行的环境
     runs-on: ubuntu-latest
 
-    # job 的步骤
+    # 作业的步骤
     steps:
-      # 步骤1: 检出你的 fork 仓库的代码
-      # 使用 persist-credentials: false 是为了避免与下一步的 token 冲突
-      - name: Checkout Fork
+      # 第一步：检出（Checkout）你的仓库代码
+      # 这是必须的，以便后续步骤可以操作你的仓库
+      - name: Checkout local repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # 获取所有历史记录，这对于某些合并策略是必要的
+          fetch-depth: 0
 
-      # 步骤2: 关键！将上游仓库的更新同步到你的 fork
-      # 这是一个社区维护的、专门用于同步 fork 的 Action，非常方便
-      - name: Sync Upstream
+      # 第二步：执行同步操作
+      # 使用了您指定的 action，并修正了所有参数
+      - name: Sync fork with upstream repository
         uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
         with:
-          # 上游仓库的地址，格式为 'owner/repo'
-          # !!!【请修改这里】!!! 将 'upstream_owner/upstream_repo' 替换为原始仓库的地址
-          upstream_repo: 'privacy-protection-tools/anti-AD'
-          
-          # 你想同步的上游分支
-          upstream_branch: 'master'
-          
-          # 你想将更新同步到你 fork 的哪个分支
-          target_branch: 'master'
-          
-          # GitHub Actions 默认提供的 token，用于授权 Action 推送代码到你的仓库
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          
-          # (可选) 如果你的 fork 分支有提交，而上游也有更新，是否强制覆盖
-          # 设为 'true' 可以避免合并冲突，但会丢弃你自己的提交。
-          # 如果你只把 fork 当作镜像，建议设为 'true'。如果你在上面有自己的修改，请谨慎。
-          force: true
+          # 【必填】上游（被 Fork 的）仓库地址
+          # 格式：'拥有者/仓库名'
+          upstream_sync_repo: 'privacy-protection-tools/anti-AD'
+
+          # 【必填】上游仓库中要同步的分支
+          upstream_sync_branch: 'master'
+
+          # 【必填】你的 Fork 仓库中要被更新的分支
+          target_sync_branch: 'master'
+
+          # 【必填】用于推送到你的 Fork 仓库的令牌
+          # 强烈建议使用 Personal Access Token (PAT) 以获得足够权限
+          target_repo_token: ${{ secrets.PAT_TOKEN }}
+
+          # 【可选】强制推送，用上游分支完全覆盖你的目标分支
+          # 这对于保持 Fork 干净非常有用
+          target_branch_push_args: '--force'
