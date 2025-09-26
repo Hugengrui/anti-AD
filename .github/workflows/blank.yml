@@ -1,5 +1,5 @@
 # 工作流的名称
-name: Sync Fork v2
+name: Sync Fork v3
 
 # 触发工作流的事件
 on:
