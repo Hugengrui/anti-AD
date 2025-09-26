@@ -35,10 +35,10 @@ jobs:
           upstream_repo: 'privacy-protection-tools/anti-AD'
           
           # 你想同步的上游分支
-          upstream_branch: 'main'
+          upstream_branch: 'master'
           
           # 你想将更新同步到你 fork 的哪个分支
-          target_branch: 'main'
+          target_branch: 'master'
           
           # GitHub Actions 默认提供的 token，用于授权 Action 推送代码到你的仓库
           github_token: ${{ secrets.GITHUB_TOKEN }}
