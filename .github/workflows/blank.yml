@@ -28,7 +28,7 @@ jobs:
       # 步骤2: 关键！将上游仓库的更新同步到你的 fork
       # 这是一个社区维护的、专门用于同步 fork 的 Action，非常方便
       - name: Sync Upstream
-        uses: aormsby/fork-sync-with-upstream@v3.4
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
         with:
           # 上游仓库的地址，格式为 'owner/repo'
           # !!!【请修改这里】!!! 将 'upstream_owner/upstream_repo' 替换为原始仓库的地址
