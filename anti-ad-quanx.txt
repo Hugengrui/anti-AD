@@ -1,7 +1,7 @@
 #TITLE=anti-AD
-#VER=20251023024837
+#VER=20251024222850
 #URL=https://github.com/privacy-protection-tools/anti-AD
-#TOTAL_LINES=97846
+#TOTAL_LINES=97845
 host-suffix,000dn.com,reject
 host-suffix,0013.cc,reject
 host-suffix,0014b04291.com,reject
@@ -41853,8 +41853,8 @@ host-suffix,iareascebc.life,reject
 host-suffix,hcdnpe.iareduceri.ro,reject
 host-suffix,iasbetaffiliates.com,reject
 host-suffix,sc.iasds01.com,reject
-host-suffix,iask.cn,reject
-host-suffix,iask.com.cn,reject
+host-suffix,dd.iask.cn,reject
+host-suffix,mwzbp.iask.com.cn,reject
 host-suffix,qiyeb.iaskbus.com,reject
 host-suffix,wneia.iaskhot.com,reject
 host-suffix,stats.iata.org,reject
@@ -69403,7 +69403,6 @@ host-suffix,activeqq.3g.qq.com,reject
 host-suffix,ad.qun.qq.com,reject
 host-suffix,ad.weixin.qq.com,reject
 host-suffix,adnet.qq.com,reject
-host-suffix,ads.privacy.qq.com,reject
 host-suffix,adsense.html5.qq.com,reject
 host-suffix,adsmind.apdcdn.tc.qq.com,reject
 host-suffix,adsolution.imtt.qq.com,reject
