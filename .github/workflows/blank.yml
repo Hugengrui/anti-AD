@@ -30,24 +30,28 @@ jobs:
 
       # 第二步：执行同步操作
       # 使用了您指定的 action，并修正了所有参数
-      - name: Sync fork with upstream repository
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
+      - name: Checkout local repository
+        uses: actions/checkout@v4
         with:
-          # 【必填】上游（被 Fork 的）仓库地址
-          # 格式：'拥有者/仓库名'
-          upstream_sync_repo: 'privacy-protection-tools/anti-AD'
-
-          # 【必填】上游仓库中要同步的分支
-          upstream_sync_branch: 'master'
-
-          # 【必填】你的 Fork 仓库中要被更新的分支
-          target_sync_branch: 'master'
-
-          # 【必填】用于推送到你的 Fork 仓库的令牌
-          # 强烈建议使用 Personal Access Token (PAT) 以获得足够权限
-          target_repo_token: ${{ secrets.PAT_TOKEN }}
-
-          # 【可选】强制推送，用上游分支完全覆盖你的目标分支
-          # 这对于保持 Fork 干净非常有用
-          exclude: '.github/workflows'
-        
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Sync from upstream but keep local workflows
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action[bot]"
+      
+          git remote add upstream https://github.com/privacy-protection-tools/anti-AD.git
+          git fetch upstream
+      
+          git checkout master
+          git merge upstream/master --no-edit || true
+      
+          git restore --source=HEAD --staged --worktree .github/workflows || true
+      
+      - name: Commit and push
+        run: |
+          git add .
+          git diff --cached --quiet || git commit -m "Sync fork with upstream"
+          git push origin master
+              
