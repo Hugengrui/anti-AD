@@ -49,5 +49,4 @@ jobs:
 
           # 【可选】强制推送，用上游分支完全覆盖你的目标分支
           # 这对于保持 Fork 干净非常有用
-          target_branch_push_args: '--force'
-          exclude: '.github/workflows'
+        
