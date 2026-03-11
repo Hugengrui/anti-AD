@@ -1,43 +1,53 @@
+# 工作流的名称
 name: Sync Fork with Upstream
 
+# 工作流的触发条件
 on:
+  # 1. 允许您在 GitHub Actions 页面手动触发此工作流
   workflow_dispatch:
+
+  # 2. 定时任务：使用 cron 语法，这里设置为每小时执行一次
+  # 如果不需要定时同步，可以注释掉下面这行
   schedule:
     - cron: '0 4 * * *'
 
+# 定义一个或多个作业
 jobs:
+  # 作业的唯一ID
   sync:
+    # 作业运行的环境
     runs-on: ubuntu-latest
 
+    # 作业的步骤
     steps:
-      - name: Checkout fork repository
+      # 第一步：检出（Checkout）你的仓库代码
+      # 这是必须的，以便后续步骤可以操作你的仓库
+      - name: Checkout local repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT_TOKEN }}
+          # 获取所有历史记录，这对于某些合并策略是必要的
           fetch-depth: 0
 
-      - name: Configure git
-        run: |
-          git config user.email "action@github.com"
-          git config user.name "GitHub Action[bot]"
+      # 第二步：执行同步操作
+      # 使用了您指定的 action，并修正了所有参数
+      - name: Sync fork with upstream repository
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
+        with:
+          # 【必填】上游（被 Fork 的）仓库地址
+          # 格式：'拥有者/仓库名'
+          upstream_sync_repo: 'privacy-protection-tools/anti-AD'
 
-      - name: Add upstream repository
-        run: |
-          git remote add upstream https://github.com/privacy-protection-tools/anti-AD.git
-          git fetch upstream
+          # 【必填】上游仓库中要同步的分支
+          upstream_sync_branch: 'master'
 
-      - name: Sync master but keep local workflows
-        run: |
-          git checkout master
-          git merge upstream/master --no-edit || true
+          # 【必填】你的 Fork 仓库中要被更新的分支
+          target_sync_branch: 'master'
 
-          git restore --source=HEAD --staged --worktree .github/workflows || true
+          # 【必填】用于推送到你的 Fork 仓库的令牌
+          # 强烈建议使用 Personal Access Token (PAT) 以获得足够权限
+          target_repo_token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Commit if needed
-        run: |
-          git add .
-          git diff --cached --quiet || git commit -m "Sync fork with upstream"
-
-      - name: Push changes
-        run: |
-          git push origin master
+          # 【可选】强制推送，用上游分支完全覆盖你的目标分支
+          # 这对于保持 Fork 干净非常有用
+          target_branch_push_args: '--force'
+          exclude: '.github/workflows'
