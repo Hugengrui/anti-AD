@@ -1,9 +1,9 @@
 !Title: anti-AD
-!Version: 20260611050506
+!Version: 20260612125013
 !Homepage: https://github.com/privacy-protection-tools/anti-AD
 !!!note! If you are using "AdGuard", please load https://anti-ad.net/adguard.txt
 !!!This list only applies to "AdGuard Home".
-!Total lines: 97301
+!Total lines: 97299
 @@||ad.azure.com^
 @@||ad.ext.azure.com^
 @@||ads.taboola.com^
@@ -10763,7 +10763,6 @@
 ||cstm.baidu.com^
 ||datax.baidu.com^
 ||dl.ops.baidu.com^
-||dlswbr.baidu.com^
 ||dxp.baidu.com^
 ||eclick.baidu.com^
 ||eduad.baidu.com^
@@ -33949,7 +33948,6 @@
 ||fzyvvgyd.com^
 ||simulatelab-datasink.fzzixun.com^
 ||g--o.info^
-||xyoss.g.com.cn^
 ||g0-g3t-msg.net^
 ||g0gr67p.de^
 ||g10102301085.co^
